@@ -137,7 +137,7 @@ input[type="search"]::-webkit-search-results-decoration {
     padding: var(--akqa-spacing-4) 0;
 }
 
-.topbar svg {
+.topbar svg.logo {
     margin-right: var(--akqa-spacing-2);
 }
 
