@@ -249,13 +249,13 @@ const chooseNav = (name, id) => {
         settleMenuItems(true, true)
     } else if (id == "secondNav") {
         choosenMenuItems.second = name.split("_").join(" ");
-        settleMenuItems(false, true)
+        settleMenuItems(true)
     } else {
         choosenMenuItems.third = name.split("_").join(" ");
     }
 }
 
-const createMneuItem = (menuHolder, type, el, index) => {
+const createMenuItem = (menuHolder, type, el, index) => {
     const id = el.split(" ").join("_");
     const menuItem = document.createElement("a");
     menuItem.id = `${menuHolder}${id}`;
@@ -270,7 +270,19 @@ const createMneuItem = (menuHolder, type, el, index) => {
     return menuItem;
 }
 
-const settleMenuItems = (second = true, third = true) => {
+const settleMenuItems = (third = false, second = false, first = false) => {
+    if (first) {
+        const firstMenu = document.getElementById("firstNav");
+        const firstMenuData = menuData;
+        const firstMenuDataKeys = Object.keys(firstMenuData);
+        // remove children
+        firstMenu.innerHTML = '';
+        firstMenuDataKeys.forEach((el, index) => {
+            const menuItem = createMenuItem('firstNav', "first", el, index);
+            firstMenu.append(menuItem);
+        })
+    }
+
     if (second) {
         const secondMenu = document.getElementById("secondNav");
         const secondMenuData = menuData[choosenMenuItems.first];
@@ -278,7 +290,7 @@ const settleMenuItems = (second = true, third = true) => {
         // remove children
         secondMenu.innerHTML = '';
         secondMenuDataKeys.forEach((el, index) => {
-            const menuItem = createMneuItem('secondNav', "second", el, index);
+            const menuItem = createMenuItem('secondNav', "second", el, index);
             secondMenu.append(menuItem);
         })
     }
@@ -291,11 +303,11 @@ const settleMenuItems = (second = true, third = true) => {
         // remove children
         thirdMenu.innerHTML = '';
         thirdMenuData.forEach((el, index) => {
-            const menuItem = createMneuItem('thirdNav', "third", el, index);
+            const menuItem = createMenuItem('thirdNav', "third", el, index);
             thirdMenu.append(menuItem);
         })
     }
 }
 
 //
-settleMenuItems();
+settleMenuItems(true, true, true);
